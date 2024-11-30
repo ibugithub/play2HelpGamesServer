@@ -84,13 +84,8 @@ export const HandleKeyboardEvents = (player, canvas) => {
   updatePlayerPosition();
 }
 
-
-
-
-
 const moveLeft = (player) => {
   player.positionX = Math.max(player.positionX - player.speed, 0);
-  console.log('the player position is', player)
 }
 
 const moveRight = (player, canvas) => {
