@@ -1,5 +1,6 @@
 import { HandleKeyboardEvents } from "./control.js";
 import { displayGameOver } from "./displayGameOver.js";
+
 const canvas = document.getElementById("gameArea");
 const ctx = canvas.getContext("2d");
 canvas.width = canvas.parentElement.clientWidth;
@@ -9,7 +10,6 @@ let score = 0;
 let gameOver = false;
 let firingIntervalId;
 let throwingIntervalId;
-
 const playerWidth = 60;
 const playerHeight = 65;
 let player = {
@@ -93,10 +93,28 @@ const doesEnemyHitPlayer = () => {
   }
 }
 
+const sendScore = async() => {
+  const SELF_BASE_URL = 'http://localhost:3003';
+  // const SELF_BASE_URL = ''
+  const subUri ='api/sendScore'
+  try {
+    await fetch(`${SELF_BASE_URL}/${subUri}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ score })
+    });
+  } catch (error) {
+    console.error('Failed to send score:', error);
+  }
+}
+
 const endGame = () => {
   gameOver = true;
   stopIntervalFunctions();
   displayGameOver(resetGame, ctx, canvas, score);
+  sendScore();
 }
 
 const resetGame = () => {
@@ -233,8 +251,6 @@ const throwEnemies = () => {
     const enemy = new Enemy(enemieImages[i], enemyX, enemyY, enemyWidth, enemyHeight, enemySpeed);
     enemies.push(enemy);
   }
-
-  console.log('enemies', enemies);
 }
 
 const drawPlayer = () => {
@@ -252,7 +268,6 @@ const updateEnemiesPositions = () => {
     }
   })
 }
-// checking if objects x position is overlaped
 
 const handleControls = () => {
   HandleKeyboardEvents(player, canvas);
@@ -288,7 +303,6 @@ const gameLoop = () => {
   } else {
     requestAnimationFrame(gameLoop);
   };
-
 }
 
 const main = () => {

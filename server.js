@@ -1,36 +1,49 @@
 import express from 'express';
+import { createServer } from 'http';
+import { Server } from 'socket.io'
 import path from 'path';
 import { fileURLToPath } from 'url';
-import dotenv from 'dotenv';
+import { PORT } from './config/env.js';
+import cors from 'cors';
+import { setHeaders } from './middlewares/headers.js';
+import routes from './routes/indexRoute.js';
+import { FRONTEND_BASE_URL } from './config/env.js';
 
-dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 3000; 
+const server = createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: FRONTEND_BASE_URL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+  }
+});
 
 // Get the directory name of the current module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Middleware to parse JSON bodies
+app.use(express.json());
 
-// Set Cross-Origin Headers for SharedArrayBuffer support
-app.use((req, res, next) => {
-  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
-  res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
-  next();
-});
+// Configure CORS to allow requests from http://localhost:3000
+app.use(cors({
+  origin: FRONTEND_BASE_URL,
+  methods: 'GET,POST,PUT,DELETE',
+  allowedHeaders: 'Content-Type,Authorization'
+}));
+
+// Middleware to set Cross-Origin Headers
+app.use(setHeaders);
 
 // Serve the game folder as static files
 app.use(express.static(path.join(__dirname, 'games')));
 
-const games = ['goGame', 'grrGame', 'racingGame', 'railrushGame', 'snakeGame','spaceShotter']
-
-// Serve index.html of all the games
-games.forEach((game) => {
-  app.get(`/${game}`, (req, res) => {
-    res.sendFile(path.join(__dirname, 'games', `${game}`, 'index.html'));
-  })
+app.use((req, res, next) => {
+  req.io = io;
+  next();
 })
+app.use(routes);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
