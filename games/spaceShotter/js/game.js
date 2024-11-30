@@ -94,8 +94,8 @@ const doesEnemyHitPlayer = () => {
 }
 
 const sendScore = async() => {
-  const SELF_BASE_URL = 'http://localhost:3003';
-  // const SELF_BASE_URL = ''
+  // const SELF_BASE_URL = 'http://localhost:3003';
+  const SELF_BASE_URL = 'https://play2helpgamesserver.onrender.com'
   const subUri ='api/sendScore'
   try {
     await fetch(`${SELF_BASE_URL}/${subUri}`, {
