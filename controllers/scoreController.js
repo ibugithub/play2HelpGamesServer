@@ -2,7 +2,7 @@ export const sendScoreFromGameEngine = async (req, res) => {
   console.log('I am in the sendScoreFromGameEngine');
   const { score } = req.body;
   console.log('the score is', score)
-  console.log('the req obj is', req);
+  console.log('the req obj is', req.get('Referer'));
   return res.json({ message: 'Score sent successfully' });
 };
 
