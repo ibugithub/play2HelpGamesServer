@@ -1,13 +1,9 @@
 import express from 'express';
-import { sendScoreToDB, setAccessTokenTolocal, pageLoaded, sendScoreFromGameEngine, test, testFromGame } from '../controllers/scoreController.js'; 
+import { sendScoreToDB,  sendScoreFromGameEngine, storeAccessToken} from '../controllers/scoreController.js'; 
 
 const router = express.Router();
 
-router.post('/sendScore', sendScoreToDB);
-router.post('/setAccessToken', setAccessTokenTolocal);
+router.post('/sendScoreToDB', sendScoreToDB);
 router.post('/sendScoreFromGameEngine', sendScoreFromGameEngine);
-router.get('/pageLoaded', pageLoaded);
-router.post('/test', test);
-router.post('/testFromGame', testFromGame);
-
+router.post('/storeAccessToken', storeAccessToken);
 export default router;

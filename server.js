@@ -8,6 +8,7 @@ import cors from 'cors';
 import { setHeaders } from './middlewares/headers.js';
 import routes from './routes/indexRoute.js';
 import { FRONTEND_BASE_URL } from './config/env.js';
+import session from 'express-session';
 
 const app = express();
 const server = createServer(app);
@@ -38,6 +39,18 @@ app.use(setHeaders);
 
 // Serve the game folder as static files
 app.use(express.static(path.join(__dirname, 'games')));
+
+// Configuration of session middleware
+app.use(session({
+  secret: '%%play2helpSecretSession%%',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { 
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    maxAge: 60 * 60 * 1000 * 20
+  }
+}));
 
 app.use((req, res, next) => {
   req.io = io;

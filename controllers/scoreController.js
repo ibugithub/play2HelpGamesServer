@@ -1,31 +1,17 @@
 import axios from "axios";
-
-export const pageLoaded = async (req, res) => { 
-  req.io.emit('game_page_loaded');
-};
-
-export const setAccessTokenTolocal = async (req, res) => {
-  const authHeader = req.headers['authorization']; 
-  if(!authHeader) {
-    return res.status(401).json({ message: 'No accessToken found' });
-  }
-  const accessToken = authHeader.split(' ')[1];
-  req.io.emit('setAccessToken', { accessToken });
-  return res.json({ accessToken });
-}
+import { v4 as uuidv4 } from 'uuid';
 
 export const sendScoreFromGameEngine = async (req, res) => {
   const { score } = req.body;
   console.log('the score is', score)
-  req.io.emit('sendScoreFromGameEngine', { score });
   return res.json({ message: 'Score sent successfully' });
 };
 
 
 export const sendScoreToDB = async (req, res) => {
-  console.log('I am in the sendScoreToDB function')
-  const { score } = req.body;
-  const accessToken = req.headers['authorization']?.split(' ')[1];
+  const { score, sessionId } = req.body;
+  const accessToken = req.session[sessionId];
+  console.log('the session in the sendScoreToDB is', req.session);
   if (accessToken && accessToken !== 'null') { 
     const subUri = 'api/games/submitScore/';
     const url = `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/${subUri}`;
@@ -38,14 +24,11 @@ export const sendScoreToDB = async (req, res) => {
 };
 
 
-export const test = async (req, res) => { 
-  console.log('I am in the test function')
-  console.log('the headers are', req.headers)
-  return res.json({ message: 'Test successful' });
-}
 
-export const testFromGame = async (req, res) => { 
-  console.log('I am in the test From game function')
-  console.log('the headers are', req.headers)
-  return res.json({ message: 'Test successful' });
-}
+export const storeAccessToken = async (req, res) => { 
+  const accessToken = req.headers['authorization']?.split(' ')[1];
+  const sessionId = uuidv4(); 
+  req.session[sessionId] = accessToken;
+  console.log('the session in storeAccessToken is', req.session);
+  return res.json({ message: 'Access Token stored successfully', sessionId: sessionId });
+};
