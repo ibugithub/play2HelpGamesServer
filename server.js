@@ -29,7 +29,8 @@ app.use(express.json());
 app.use(cors({
   origin: FRONTEND_BASE_URL,
   methods: 'GET,POST,PUT,DELETE',
-  allowedHeaders: 'Content-Type,Authorization'
+  allowedHeaders: 'Content-Type,Authorization',
+  credentials: true,
 }));
 
 // Middleware to set Cross-Origin Headers
