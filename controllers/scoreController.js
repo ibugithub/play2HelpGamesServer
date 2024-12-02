@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export const sendScoreFromGameEngine = async (req, res) => {
   console.log('I am in the sendScoreFromGameEngine');
   const { score } = req.body;
@@ -10,7 +8,7 @@ export const sendScoreFromGameEngine = async (req, res) => {
 
 
 export const sendScoreToDB = async (req, res) => {
-  console.log('the req  in sendScore is', req);
+  console.log('the req  in sendScore is', req.get('Referer'));
   const { score } = req.body;
   // console.log('the accessToken in the sendScoreToDB is', accessToken);
   // if (accessToken && accessToken !== 'null') { 
