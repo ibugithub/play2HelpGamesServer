@@ -97,7 +97,7 @@ const endGame = () => {
   gameOver = true;
   stopIntervalFunctions();
   displayGameOver(resetGame, ctx, canvas, score);
-  sendScore(score);
+  sendScore(score, 'spaceShotter');
 }
 
 const resetGame = () => {

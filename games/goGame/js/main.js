@@ -205,6 +205,7 @@ function gameLoop() {
 
       // Show the retry button
       retryButton.style.display = "flex";
+      sendScore(score, 'MarioGo'); 
     }
   });
 

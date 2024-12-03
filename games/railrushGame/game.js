@@ -2,7 +2,7 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 let score = 0;
-let highestScore = localStorage.getItem("highestScore") || 0; // Retrieve highest score from storage
+let highestScore = localStorage.getItem("highestScore") || 0; 
 let gameOver = false;
 let gamePaused = true;
 let currentRailIndex = 1;
@@ -121,6 +121,7 @@ function detectCollisions() {
         false
       );
       cancelAnimationFrame(animationFrame);
+      sendScore(score, 'Rail Rush');
     }
   });
 }
