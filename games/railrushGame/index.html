@@ -189,13 +189,14 @@
         </button>
       </div>
       <button id="menuButton" onclick="toggleMenu()">Menu</button>
-      <button id="leftButton" onclick="moveLeft()">
-        <img id="left-arrow" class="arrow-icon" />
+      <button type="button" title="left arrow" id="leftButton" onclick="moveLeft()">
+        <img title="arrow Icon" id="left-arrow" class="arrow-icon" />
       </button>
-      <button id="rightButton" onclick="moveRight()">
-        <img id="right-arrow" class="arrow-icon" />
+      <button type="button" title="right arrow" id="rightButton" onclick="moveRight()">
+        <img title="arrow icon" id="right-arrow" class="arrow-icon" />
       </button>
     </div>
-    <script src="game.js"></script>
+    <script  src="game.js"></script>
+    <script src="../sendScoreToGameServerEs5.js" ></script>
   </body>
 </html>

@@ -1,5 +1,6 @@
 import { HandleKeyboardEvents } from "./control.js";
 import { displayGameOver } from "./displayGameOver.js";
+import { sendScore } from "../../sendScoreToGameServer.js";
 
 const canvas = document.getElementById("gameArea");
 const ctx = canvas.getContext("2d");
@@ -92,29 +93,11 @@ const doesEnemyHitPlayer = () => {
     }
   }
 }
-
-const sendScore = async() => {
-  // const SELF_BASE_URL = 'http://localhost:3003';
-  const SELF_BASE_URL = 'https://play2helpgamesserver.onrender.com'
-  const subUri ='api/sendScore'
-  try {
-    await fetch(`${SELF_BASE_URL}/${subUri}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ score })
-    });
-  } catch (error) {
-    console.error('Failed to send score:', error);
-  }
-}
-
 const endGame = () => {
   gameOver = true;
   stopIntervalFunctions();
   displayGameOver(resetGame, ctx, canvas, score);
-  sendScore();
+  sendScore(score, 'spaceShotter');
 }
 
 const resetGame = () => {

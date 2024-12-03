@@ -29,13 +29,13 @@ function isCollided(div1, div2) {
   }
   
   // 2. Criteria for stopping the game
-  
   function stopTheGame() {
     // change game_over to true to be recognized by repeat() method to stop rendering.
     game_over = true;
-  
     addNewScore(score);
-  
+    sendScore(score.innerText, 'carGame');
+    console.log("Game Over");
+    console.log('the score is', score.innerHTML);
     // cancel all animations.
     cancelAnimationFrame(anim_id);
     cancelAnimationFrame(move_up);
