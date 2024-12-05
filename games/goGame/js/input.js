@@ -42,10 +42,10 @@ jumpButton.addEventListener("touchend", () => {
 // Handle player input (keyboard and mobile controls)
 export function handleInput(player) {
   if (keys.ArrowLeft) {
-    player.x -= 5;
+    player.x -= 4;
   }
   if (keys.ArrowRight) {
-    player.x += 5;
+    player.x += 4;
   }
   if (keys.Space && player.isOnGround) {
     player.jump();
