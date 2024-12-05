@@ -329,7 +329,7 @@ window.onload = function () {
       }
 
       // Add cluster score
-      score += cluster.length * 100;
+      score += cluster.length * 1;
 
       // Find floating clusters
       floatingclusters = findFloatingClusters();
@@ -518,10 +518,10 @@ window.onload = function () {
         // Game over
         nextBubble();
         setGameState(gamestates.gameover);
+        sendScore(score, "bubble");
         return true;
       }
     }
-
     return false;
   }
 

@@ -3,7 +3,7 @@ import scoreRoutes from './scoreRoute.js'
 
 const router = express.Router();
 
-const games = ['goGame', 'grrGame', 'racingGame', 'railrushGame', 'snakeGame','spaceShotter']
+const games = ['goGame', 'grrGame', 'racingGame', 'railrushGame', 'snakeGame','spaceShotter', 'bubbleGame', 'yumGame', 'tetrixGame']
 
 games.forEach((game) => {
   router.get(`/${game}`, (req, res) => {
