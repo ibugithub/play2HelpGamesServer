@@ -135,6 +135,7 @@ $(board).on("scoreUpdate", function (e, info) {
 
   $(scoreLabel).empty();
   $(scoreLabel).append(info.score + " points");
+  console.log('score:', info.score)
 
   if (info.candy != undefined) {
     $(scoreLabel).css("background-color", info.candy.color);
@@ -454,7 +455,6 @@ function Crush() {
 		}, 500);
 	}
 	*/
-
   setTimeout(function () {
     rules.moveCandiesDown();
   }, 500);
@@ -467,3 +467,11 @@ function NewGame() {
   board.resetScore();
   rules.prepareNewGame();
 }
+
+let oldScore = 0;
+document.getElementById('saveScore').addEventListener('click', function() {
+  if (board.score > oldScore){
+    oldScore = board.score;
+    sendScore(board.score, 'yum');
+  }
+})

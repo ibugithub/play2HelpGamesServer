@@ -112,7 +112,7 @@ export class ClearLines {
     calcDamage(combo, type, isPC, btb, isBTB) {
         type = type.toUpperCase().trim();
         const btbdamage = () => {
-            const x = Math.log1p(btb * 0.8);
+            const x = Math.log1p(btb * 0.2);
             return ~~(Math.floor(x + 1) + (1 + (x % 1)) / 3);
         };
         if (!attackValues.hasOwnProperty(type)) return 0; // if type not real

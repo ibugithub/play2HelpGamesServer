@@ -21,6 +21,7 @@ import { Zenith, Grandmaster } from "./mechanics/gamemode_extended.js";
 import { PixiRender } from "./display/pixirender.js";
 import { Animations } from "./display/animations.js";
 import { Replay } from "./features/replays.js";
+import { sendScore } from "../../sendScoreToGameServer.js";
 
 export class Game {
   started;
@@ -135,6 +136,7 @@ export class Game {
     this.elementReason.textContent = top;
     this.elementResult.textContent = bottom;
     this.profilestats.saveSession();
+    sendScore(this.stats.score, 'tetris');
   }
 
   resetState(seed = undefined) {
