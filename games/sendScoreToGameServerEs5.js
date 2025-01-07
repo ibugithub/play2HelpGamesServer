@@ -1,6 +1,6 @@
 function sendScore(score, gameName) {
   // var SELF_BASE_URL = 'http://localhost:3003';
-  var SELF_BASE_URL = 'https://play2helpgamesserver.onrender.com'
+  var SELF_BASE_URL = 'https://play2help-game-server-dot-opendoorsaccelerator.df.r.appspot.com'
   var subUri = 'api/sendScoreToDB';
   var url = SELF_BASE_URL + '/' + subUri;
 

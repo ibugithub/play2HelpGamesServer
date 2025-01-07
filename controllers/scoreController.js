@@ -6,10 +6,14 @@ export const sendScoreToDB = async (req, res) => {
   const accessToken = url.searchParams.get('to');
   const { score, gameName } = req.body;
   const tokens = score * 0.0002;
-  if (accessToken && accessToken !== 'null') { 
+  if (accessToken && accessToken !== 'null') {
     const subUri = 'api/games/submitScore/';
     const url = `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/${subUri}`;
-    axios.post(url, { score: score, game: gameName, tokens }, { headers: { Authorization: `Bearer ${accessToken}` } });
+    try {
+      axios.post(url, { score: score, game: gameName, tokens }, { headers: { Authorization: `Bearer ${accessToken}` } });
+    } catch (error) {
+      console.log('error while sending score to game server', error);
+    }
   }
   else {
     console.log("No access token found in local storage");

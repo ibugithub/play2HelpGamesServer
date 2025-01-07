@@ -1,6 +1,6 @@
 export const sendScore = async(score, gameName) => {
   // const SELF_BASE_URL = 'http://localhost:3003';
-  const SELF_BASE_URL = 'https://play2helpgamesserver.onrender.com'
+  const SELF_BASE_URL = 'https://play2help-game-server-dot-opendoorsaccelerator.df.r.appspot.com'
   const subUri ='api/sendScoreToDB'
   try {
     await fetch(`${SELF_BASE_URL}/${subUri}`, {
