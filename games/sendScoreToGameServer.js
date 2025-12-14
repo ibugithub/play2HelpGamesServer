@@ -1,7 +1,8 @@
 export const sendScore = async(score, gameName) => {
-  // const SELF_BASE_URL = 'http://localhost:3003';
-  const SELF_BASE_URL = 'https://play2helpgamesserver.onrender.com'
+  const SELF_BASE_URL = 'http://localhost:3003';
+  // const SELF_BASE_URL = 'https://play2helpgamesserver.onrender.com'
   const subUri ='api/sendScoreToDB'
+  
   try {
     // ensure the score has at most 4 decimal places
     let formattedScore = score;
