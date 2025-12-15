@@ -7,13 +7,13 @@ import { PORT } from './config/env.js';
 import cors from 'cors';
 import { setHeaders } from './middlewares/headers.js';
 import routes from './routes/indexRoute.js';
-import { FRONTEND_BASE_URL } from './config/env.js';
+import { ALLOWED_FRONTEND } from './config/env.js';
 
 const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: FRONTEND_BASE_URL,
+    origin: ALLOWED_FRONTEND,
     methods: ['GET', 'POST', 'PUT', 'DELETE']
   }
 });
@@ -25,9 +25,9 @@ const __dirname = path.dirname(__filename);
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-// Configure CORS to allow requests from http://localhost:3000
+// Configure CORS to allow requests from multiple origins
 app.use(cors({
-  origin: FRONTEND_BASE_URL,
+  origin: ALLOWED_FRONTEND,
   methods: 'GET,POST,PUT,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
   credentials: true,

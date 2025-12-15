@@ -1,8 +1,8 @@
 function sendScore(score, gameName) {
-  var SELF_BASE_URL = 'http://localhost:3003';
-  // var SELF_BASE_URL = 'https://play2helpgamesserver.onrender.com';
+  // var GAME_SERVER_URL = 'http://localhost:3003';
+  var GAME_SERVER_URL = 'https://play2gamesserver.onrender.com';
   var subUri = 'api/sendScoreToDB';
-  var url = SELF_BASE_URL + '/' + subUri;
+  var url = GAME_SERVER_URL + '/' + subUri;
   var formattedScore = score;
   if (score !== null && score !== undefined) {
     var n = Number(score);
