@@ -36,6 +36,13 @@ app.use(cors({
 // Middleware to set Cross-Origin Headers
 app.use(setHeaders);
 
+// Log the origin of incoming requests
+app.use((req, res, next) => {
+  const origin = req.get('origin') || req.get('referer') || 'Direct access';
+  console.log(`Request from: ${origin} - ${req.method} ${req.path}`);
+  next();
+});
+
 // Serve the game folder as static files
 app.use(express.static(path.join(__dirname, 'games')));
 

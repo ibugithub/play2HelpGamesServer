@@ -7,8 +7,6 @@ const games = ['goGame', 'grrGame', 'racingGame', 'railrushGame', 'snakeGame','s
 
 games.forEach((game) => {
   router.get(`/${game}`, (req, res) => {
-    const origin = req.get('origin');
-    console.log(`Game ${game} accessed from origin: ${origin}`);
     res.sendFile(path.join(__dirname, 'games', `${game}`, 'index.html'));
   })
 })
