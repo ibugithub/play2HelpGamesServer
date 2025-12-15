@@ -1,10 +1,7 @@
 import axios from "axios";
 
 export const sendScoreToDB = async (req, res) => {
-  const origin = req.get('Origin');
-  console.log('Request origin:', origin);
   const referer = req.get('Referer');
-  console.log('Request referer:', referer);
   const url = new URL(referer);
   const accessToken = url.searchParams.get('to');
   const { score, gameName } = req.body;
