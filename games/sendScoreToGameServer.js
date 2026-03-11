@@ -1,6 +1,6 @@
 export const sendScore = async(score, gameName) => {
-  // const GAME_SERVER_URL = 'http://localhost:3003';
-  const GAME_SERVER_URL = 'https://play2gamesserver.onrender.com'
+  const GAME_SERVER_URL = 'http://localhost:3003';
+  // const GAME_SERVER_URL = 'https://play2gamesserver.onrender.com'
   const subUri ='api/sendScoreToDB'
   
   try {

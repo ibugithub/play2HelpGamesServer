@@ -1,6 +1,6 @@
 function sendScore(score, gameName) {
-  // var GAME_SERVER_URL = 'http://localhost:3003';
-  var GAME_SERVER_URL = 'https://play2gamesserver.onrender.com';
+  var GAME_SERVER_URL = 'http://localhost:3003';
+  // var GAME_SERVER_URL = 'https://play2gamesserver.onrender.com';
   var subUri = 'api/sendScoreToDB';
   var url = GAME_SERVER_URL + '/' + subUri;
   var formattedScore = score;

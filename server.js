@@ -11,12 +11,6 @@ import { ALLOWED_FRONTEND } from './config/env.js';
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: ALLOWED_FRONTEND,
-    methods: ['GET', 'POST', 'PUT', 'DELETE']
-  }
-});
 
 // Get the directory name of the current module
 const __filename = fileURLToPath(import.meta.url);
@@ -38,19 +32,12 @@ app.use(setHeaders);
 
 // Log the origin of incoming requests
 app.use((req, res, next) => {
-  const origin = req.get('origin') || req.get('referer') || 'Direct access';
-  console.log(`Request from: ${origin} - ${req.method} ${req.path}`);
   next();
 });
 
 // Serve the game folder as static files
 app.use(express.static(path.join(__dirname, 'games')));
 
-
-app.use((req, res, next) => {
-  req.io = io;
-  next();
-})
 app.use(routes);
 
 server.listen(PORT, () => {
